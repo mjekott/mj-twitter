@@ -12,7 +12,9 @@ const Tweet = ({ tweetObj, isOwner }) => {
       return;
     }
     await dbService.doc(`tweets/${tweetObj.id}`).delete();
+    if(attchementUrl)
     await storageService.refFromURL(attchementUrl).delete();
+  }
   };
 
   const onSubmit = async (event) => {

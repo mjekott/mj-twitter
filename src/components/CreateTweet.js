@@ -18,6 +18,7 @@ const CreateTweet = ({ userObj }) => {
       setAttachment(result);
     };
     reader.readAsDataURL(file);
+    event.target.value = null;
   };
 
   const onSubmit = async (event) => {
