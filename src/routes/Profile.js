@@ -1,5 +1,5 @@
-import { authService, dbService } from 'fbase';
-import React, { useEffect, useState } from 'react';
+import { authService } from 'fbase';
+import React, { useState } from 'react';
 import { useHistory } from 'react-router';
 
 const Profile = ({ userObj, refreshuser }) => {
@@ -29,8 +29,8 @@ const Profile = ({ userObj, refreshuser }) => {
     refreshuser();
   };
 
-  const getMyTweets = async () => {
-    const data = await dbService
+  /*   const getMyTweets = async () => {
+    await dbService
       .collection('tweets')
       .where('creatorId', '==', userObj.uid)
       .orderBy('createdAt')
@@ -39,7 +39,7 @@ const Profile = ({ userObj, refreshuser }) => {
 
   useEffect(() => {
     getMyTweets();
-  }, []);
+  }, []); */
 
   return (
     <>

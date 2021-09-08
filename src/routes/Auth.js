@@ -42,15 +42,12 @@ const Auth = () => {
     event.preventDefault();
     try {
       if (newAccount) {
-        const data = await authService.createUserWithEmailAndPassword(
-          email,
-          password
-        )(email, password);
-      } else {
-        const data = await authService.signInWithEmailAndPassword(
+        await authService.createUserWithEmailAndPassword(email, password)(
           email,
           password
         );
+      } else {
+        await authService.signInWithEmailAndPassword(email, password);
       }
     } catch (error) {
       setError(error.message);
@@ -59,6 +56,7 @@ const Auth = () => {
 
   return (
     <div>
+      <span>{error && error}</span>
       <form onSubmit={onSubmit}>
         <input
           type="text"
