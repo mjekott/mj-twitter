@@ -11,10 +11,10 @@ import Navigation from './Navigation';
 import Profile from 'routes/Profile';
 
 // eslint-disable-next-line import/no-anonymous-default-export
-const AppRouter = ({ isLoggedIn, userObj }) => {
+const AppRouter = ({ isLoggedIn, userObj, refreshuser }) => {
   return (
     <Router>
-      {isLoggedIn && <Navigation />}
+      {isLoggedIn && <Navigation userObj={userObj} />}
       <Switch>
         {isLoggedIn ? (
           <>
@@ -22,7 +22,7 @@ const AppRouter = ({ isLoggedIn, userObj }) => {
               <Home userObj={userObj} />
             </Route>
             <Route exact path="/profile">
-              <Profile />
+              <Profile userObj={userObj}  refreshuser={refreshuser} />
             </Route>
             <Redirect from="*" to="/" />
           </>
