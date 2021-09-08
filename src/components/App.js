@@ -12,6 +12,7 @@ function App() {
         setUserObj(user);
       } else {
         setisLoggedIn(false);
+        setUserObj({});
       }
       setInit(true);
     });
