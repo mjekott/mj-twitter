@@ -1,16 +1,18 @@
-import { dbService } from 'fbase';
+import { dbService, storageService } from 'fbase';
 import React from 'react';
 import { useState } from 'react';
 
 const Tweet = ({ tweetObj, isOwner }) => {
   const [editing, setEditing] = useState(false);
   const [newTweet, setNewTeet] = useState(tweetObj.text);
+  const { attchementUrl } = tweetObj;
   const OnDeleteTweet = async () => {
     const ok = window.confirm('Do you want to delete tweet');
     if (!ok) {
       return;
     }
     await dbService.doc(`tweets/${tweetObj.id}`).delete();
+    await storageService.refFromURL(attchementUrl).delete();
   };
 
   const onSubmit = async (event) => {
@@ -34,6 +36,7 @@ const Tweet = ({ tweetObj, isOwner }) => {
   };
 
   const toggleEditing = () => setEditing((prev) => !prev);
+
   return (
     <div>
       {editing ? (
@@ -51,6 +54,16 @@ const Tweet = ({ tweetObj, isOwner }) => {
       ) : (
         <div>
           <h4>{tweetObj.text}</h4>
+          {attchementUrl && (
+            <div>
+              <img
+                src={attchementUrl}
+                alt="tweetimage"
+                width="50"
+                height="50"
+              />
+            </div>
+          )}
           {isOwner && (
             <>
               <button onClick={toggleEditing}>Edit</button>
